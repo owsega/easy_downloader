@@ -34,3 +34,6 @@ easy_downloader2/zanime_41.ipa
 *.isar
 easy_downloader2/example/default.isar
 easy_downloader2/example/default.isar.lock
+
+easy_downloader_flutter_lib/android/local.properties
+
