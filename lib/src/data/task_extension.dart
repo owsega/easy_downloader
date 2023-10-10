@@ -120,3 +120,10 @@ extension TaskExtension on DownloadTask {
     await EasyDownloader._localeStorage.deleteDownloadTask(downloadId);
   }
 }
+
+extension IdExtension on Id {
+  ///get download task
+  Future<DownloadTask?> downloadTask() async {
+    return EasyDownloader._localeStorage.getDownloadTask(this);
+  }
+}
