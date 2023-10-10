@@ -11,6 +11,7 @@ part of '../easy_downloader_base.dart';
 /// [updateLocalPath] updates the download path (e.g. to fix invalid path
 ///   after app restarts since iOS changes application documents
 ///   directory's absolute path at every app launch)
+///  [delete] delete task from database
 extension TaskExtension on DownloadTask {
   ///start task
   void start() {
@@ -110,5 +111,12 @@ extension TaskExtension on DownloadTask {
     task = task!.copyWith(path: newPath);
     await EasyDownloader._localeStorage.setDownloadTask(task);
     return task;
+  }
+
+  ///delete task from database
+  void delete() async {
+    var task = await EasyDownloader._localeStorage.getDownloadTask(downloadId);
+    assert(task != null, 'EasyDownloader: task must not be null');
+    await EasyDownloader._localeStorage.deleteDownloadTask(downloadId);
   }
 }
