@@ -148,4 +148,26 @@ class EasyDownloader {
   ///listen download task by id
   Stream<void>? downloadTaskStream(int id) =>
       _localeStorage.watchDownloadTask(id);
+
+  ///create a [DownloadTask] without downloading
+  Future<DownloadTask> sideloadTask({
+    required String url,
+    required String path,
+    required String fileName,
+    required DownloadStatus status,
+    Map<String, String> headers = const {},
+  }) async {
+    assert(_isInit, 'EasyDownloader not initialized');
+    var task = DownloadTask(
+        url: url,
+        path: path,
+        fileName: fileName,
+        status: status,
+        headers: IsarMapEntityEasyDownloader.fromJson(headers));
+    final id = await _localeStorage.setDownloadTask(task);
+    task = task.copyWith(downloadId: id);
+    assert(id != null, 'EasyDownloader: id must not be null');
+
+    return task;
+  }
 }
