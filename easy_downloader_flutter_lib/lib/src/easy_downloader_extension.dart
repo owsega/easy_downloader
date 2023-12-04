@@ -12,6 +12,7 @@ extension EasyDownloaderExt on EasyDownloader {
     AndroidInitializationSettings? androidInitializationSettings,
     DarwinInitializationSettings? darwinInitializationSettings,
     String? defaultIconAndroid,
+    maxConcurrentDownloads = 10,
   }) async {
     await EasyDownloader()
         .init(isar: isar, localeStoragePath: localeStoragePath);
