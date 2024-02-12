@@ -19,10 +19,12 @@ class Runner {
   static final Log log = Log();
 
   ///init runner
-  static Runner init() {
+  static Runner init({
+    int maxConcurrentTasks = 10,
+  }) {
     assert(!_isInit, 'Runner already initialized');
     _taskRunner = TaskRunner(
-      maxConcurrentTasks: 10,
+      maxConcurrentTasks: maxConcurrentTasks,
       (task, runner) async {
         log.wtf('start task $task');
         var completer = Completer();

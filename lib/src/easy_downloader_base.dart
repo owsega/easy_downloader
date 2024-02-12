@@ -46,7 +46,8 @@ class EasyDownloader {
   Future<EasyDownloader> init(
       {String? localeStoragePath,
       Isar? isar,
-      bool clearLocaleStorage = false}) async {
+      bool clearLocaleStorage = false,
+      int maxConcurrentDownloads = 10}) async {
     assert(!_isInit, 'EasyDownloader already initialized');
     await Isar.initializeIsarCore(download: true);
     localeStoragePath ??= Directory.systemTemp.path;
@@ -61,7 +62,7 @@ class EasyDownloader {
       },
     );
 
-    _runner = Runner.init();
+    _runner = Runner.init(maxConcurrentTasks: maxConcurrentDownloads);
 
     //reset all tasks
     var allTasks = _localeStorage.getDownloadTasks();

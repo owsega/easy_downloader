@@ -14,8 +14,11 @@ extension EasyDownloaderExt on EasyDownloader {
     String? defaultIconAndroid,
     maxConcurrentDownloads = 10,
   }) async {
-    await EasyDownloader()
-        .init(isar: isar, localeStoragePath: localeStoragePath);
+    await EasyDownloader().init(
+      isar: isar,
+      localeStoragePath: localeStoragePath,
+      maxConcurrentDownloads: maxConcurrentDownloads,
+    );
     if (allowNotification) {
       assert(
           defaultIconAndroid != null || androidInitializationSettings != null,
